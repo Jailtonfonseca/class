@@ -182,7 +182,6 @@ class InstallController extends Controller
     public function createAdmin(Request $request)
     {
         $rules = [
-            'purchase_code' => ['required', 'string', 'max:50']
         ];
 
         $db_empty = $this->isDBEmpty();
@@ -207,8 +206,6 @@ class InstallController extends Controller
         if ($response !== true) {
             return back()->with('error', ___('Database migration failed.').' '.$response)->withInput();
         }
-
-        Option::updateOptions('purchase_code', $request->input('purchase_code'));
 
         $response = $this->createAdminUser($request, $db_empty);
         if ($response !== true) {
