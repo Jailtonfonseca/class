@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./script
+      dockerfile: Dockerfile
+    container_name: quickad-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./script:/var/www
+    networks:
+      - quickad
+
+  nginx:
+    image: nginx:alpine
+    container_name: quickad-nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./script:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - quickad
+
+  db:
+    image: mysql:8.0
+    container_name: quickad-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: quickad
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: quickad
+      MYSQL_PASSWORD: password
+    volumes:
+      - dbdata:/var/lib/mysql
+    networks:
+      - quickad
+
+volumes:
+  dbdata:
+
+networks:
+  quickad:
+    driver: bridge

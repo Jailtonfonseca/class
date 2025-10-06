@@ -1,0 +1,24 @@
+.push-right .push-this, .push-left .push-this, .qp-chevron-left, .qp-chevron-right, .tns-carousel-controls [data-controls], .tns-carousel-wrapper [data-controls] {
+    transform: rotateZ(180deg) !important;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    transform: rotateZ(180deg);
+    padding: 0 var(--qp-breadcrumb-item-padding-x) 0 0;
+}
+
+.push-right:hover .push-this {
+    transform: rotateZ(180deg) translateX(4px) !important;
+}
+
+.push-left:hover .push-this {
+    transform: rotateZ(180deg) translateX(-4px) !important;
+}
+
+.select2-container .select2-selection--single {
+    background-position: left 1.125rem center;
+}
+
+.leaflet-popup-content {
+    text-align: right;
+}
