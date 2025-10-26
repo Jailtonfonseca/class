@@ -49,9 +49,7 @@
                             <li class="nav-item" role="presentation">
                                 <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#quick_custom_code"><i class="fas fa-code me-2"></i> {{ ___('Custom Code') }}</button>
                             </li>
-                            <li class="nav-item d-none" role="presentation">
-                                <button type="button" class="nav-link" role="tab" data-bs-toggle="tab" data-bs-target="#quick_purchase_code"><i class="fas fa-key me-2"></i> {{ ___('Purchase Code') }}</button>
-                            </li>
+                            
                         </ul>
                     </div>
                 </div>
@@ -72,7 +70,7 @@
                     @include('admin.settings.map')
                     @include('admin.settings.live_location')
                     @include('admin.settings.custom-code')
-                    @include('admin.settings.purchase-code')
+                    
                 </div>
             </div>
         </div>
