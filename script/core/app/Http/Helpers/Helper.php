@@ -384,7 +384,6 @@ function ___($key, array $replace = [])
             $translations[$trans_slug] = $key;
             try {
                 File::put($filePath, "<?php\n\nreturn ".var_export($translations, true).";\n");
-            } catch (\Throwable $e) {
                 //
             }
         }
