@@ -378,7 +378,11 @@ function ___($key, array $replace = [])
 
         if (!array_key_exists($trans_slug, $translations)) {
             $translations[$trans_slug] = $key;
-            File::put($filePath, "<?php\n\nreturn ".var_export($translations, true).";\n");
+            try {
+                File::put($filePath, "<?php\n\nreturn ".var_export($translations, true).";\n");
+            } catch (\Exception $e) {
+                //
+            }
         }
     }
 
