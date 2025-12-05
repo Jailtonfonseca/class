@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 use Jenssegers\Date\Date;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 /* Include all the other helpers here */
 include 'PluginHelper.php';
