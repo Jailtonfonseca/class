@@ -1,21 +1,49 @@
 # QuickAd Classified Ads Script
 
-Este repositório contém o script QuickAd para anúncios classificados, configurado para execução em containers Docker com código de compra removido.
+Este repositório contém o script QuickAd para anúncios classificados, configurado para execução em containers Docker.
 
-## Funcionalidades
+![Dashboard Principal](Documentation/assets/screenshot/quick-main.png)
 
-- Sistema completo de anúncios classificados
-- Interface administrativa
-- Suporte a múltiplos idiomas
-- Integração com gateways de pagamento
-- Sistema de usuários e perfis
+## 📋 Funcionalidades
 
-## Pré-requisitos
+- 📢 Sistema completo de anúncios classificados
+- ⚙️ Interface administrativa robusta
+- 🌍 Suporte a múltiplos idiomas
+- 💳 Integração com gateways de pagamento
+- 👤 Sistema de usuários e perfis
 
+## 🏗️ Arquitetura
+
+O projeto utiliza Docker Compose para orquestrar os serviços. Abaixo está o diagrama da arquitetura:
+
+```mermaid
+graph TD
+    User[Usuário / Navegador] -->|HTTP:8000| Nginx[Nginx (Web Server)]
+    Nginx -->|PHP-FPM:9000| App[App (PHP 8.1)]
+    App -->|TCP:3306| DB[(MySQL 8.0)]
+
+    subgraph Docker Network
+    Nginx
+    App
+    DB
+    end
+```
+
+## 🖼️ Screenshots
+
+### Configurações Gerais
+![Configurações Gerais](Documentation/assets/screenshot/quick-general-setting.png)
+
+### Login Google
+![Login Google](Documentation/assets/screenshot/quick-google-login.png)
+
+## 🚀 Instalação e Execução
+
+### Pré-requisitos
 - Docker
 - Docker Compose
 
-## Instalação e Execução
+### Passos
 
 1. Clone este repositório:
    ```bash
@@ -29,39 +57,50 @@ Este repositório contém o script QuickAd para anúncios classificados, configu
    ```
 
 3. Acesse a aplicação:
-   - Frontend: http://localhost:8000
-   - Durante a instalação, siga os passos no navegador
+   - **Frontend**: http://localhost:8000
+   - Siga o assistente de instalação no primeiro acesso.
 
-## Configuração do Banco de Dados
+## 💾 Configuração do Banco de Dados
 
-O Docker Compose inclui um container MySQL com as seguintes configurações padrão:
-- Banco: `quickad`
-- Usuário: `quickad`
-- Senha: `password`
-- Root Password: `rootpassword`
+O container MySQL vem pré-configurado:
 
-Você pode alterar essas configurações no arquivo `docker-compose.yml`.
+| Variável | Valor Padrão |
+|----------|--------------|
+| Database | `quickad`    |
+| User     | `quickad`    |
+| Password | `password`   |
+| Root Pwd | `rootpassword`|
 
-## Estrutura do Projeto
+⚠ *Você pode alterar essas credenciais no arquivo `docker-compose.yml`.*
 
-- `script/`: Código fonte da aplicação
-- `nginx/`: Configuração do Nginx
-- `docker-compose.yml`: Configuração dos containers
-- `Dockerfile`: Build da aplicação PHP
+## 📂 Estrutura do Projeto
 
-## Desenvolvimento
+```
+.
+├── script/              # Código fonte da aplicação Laravel
+│   ├── core/            # Core do Framework
+│   └── ...
+├── nginx/               # Configuração do servidor Web
+├── Documentation/       # Documentação e screenshots
+├── docker-compose.yml   # Orquestração dos containers
+└── Dockerfile           # Definição da imagem PHP
+```
 
-Para desenvolvimento, você pode montar volumes para alterações em tempo real:
+## 🛠️ Desenvolvimento
+
+O volume do código fonte já está mapeado no `docker-compose.yml` para permitir desenvolvimento em tempo real:
 
 ```yaml
 volumes:
   - ./script:/var/www
 ```
 
-## Suporte
+Qualquer alteração na pasta `script/` será refletida imediatamente no container.
+
+## 🤝 Suporte
 
 Este script foi modificado para remover verificações de código de compra. Para suporte técnico, consulte a documentação original ou a comunidade.
 
-## Licença
+## 📄 Licença
 
 Consulte os termos da licença original do QuickAd.
