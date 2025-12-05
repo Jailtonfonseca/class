@@ -798,8 +798,9 @@ class PostController extends Controller
      */
     public function revert(Request $request)
     {
-        remove_file('storage/products/thumb/'.$request->getContent());
-        remove_file('storage/products/'.$request->getContent());
+        $filename = basename($request->getContent());
+        remove_file('storage/products/thumb/'.$filename);
+        remove_file('storage/products/'.$filename);
         $result = array(
             'success' => true,
             'message' => ___('File Removed')
