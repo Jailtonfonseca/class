@@ -41,12 +41,16 @@ function set_env($key, $value, $quote = false)
 
     if (file_exists($path)) {
         $str = file_get_contents($path);
-        if (str_contains($str, "$key=".$old)) {
-            file_put_contents($path, str_replace(
-                "$key=".$old, "$key=".$value, $str
-            ));
-        } else {
-            file_put_contents($path, $str."\n$key=".$value);
+        try {
+            if (str_contains($str, "$key=".$old)) {
+                file_put_contents($path, str_replace(
+                    "$key=".$old, "$key=".$value, $str
+                ));
+            } else {
+                file_put_contents($path, $str."\n$key=".$value);
+            }
+        } catch (\Throwable $e) {
+            //
         }
     }
 }
@@ -378,7 +382,11 @@ function ___($key, array $replace = [])
 
         if (!array_key_exists($trans_slug, $translations)) {
             $translations[$trans_slug] = $key;
-            File::put($filePath, "<?php\n\nreturn ".var_export($translations, true).";\n");
+            try {
+                File::put($filePath, "<?php\n\nreturn ".var_export($translations, true).";\n");
+            } catch (\Throwable $e) {
+                //
+            }
         }
     }
 
